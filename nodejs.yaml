@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: nodejsapp
+  namespace: test-ns
+spec:
+  replicas: 2
+  strategy:
+    type: rollingUpdate
+  selector:
+    matchLabels:
+      app: nodejs
+  template:
+    metadata:
+      labels:
+        app: nodejs
+    spec:
+      containers:
+      - name: nodejsapp
+        image: shahir5890/node-app:TAG 
+        ports:
+        - containerPort: 9981
+        resources:
+          limits:
+            cpu: 256m
+            memory: 256Mi
+          requests:
+            cpu: 500m
+            memory: 500Mi
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: nodejssvc
+  namespace: test-ns
+spec:
+  type: LoadBalancer
+  selector:
+    app: nodejs
+  ports: 
+  - port: 9981
+    targetPort: 9981
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: nodejsHpa
+  namespace: test-ns
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment 
+    name: nodejsapp
+  minReplicas: 2
+  maxReplicas: 5
+  resources: 
+    name: cpu
+    target: 
+      type: Utilization
+      averageUtilization: 50
