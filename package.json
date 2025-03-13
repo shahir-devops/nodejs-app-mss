@@ -11,7 +11,7 @@
     "start1": "nodemon app.js",
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-     "sonar": "node sonar-project.js"
+    "sonar": "node sonar-project.js"
   },
   "dependencies": {
     "cfenv": "^1.1.0",
@@ -26,7 +26,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MithunTechnologies/node-js-application"
+    "url": "git+https://github.com/MithunTechnologies/node-js-application.git"
   },
   "keywords": [
     "node",
@@ -34,5 +34,9 @@
     "express"
   ],
   "author": "Mithun Reddy Lacchannagari",
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MithunTechnologies/node-js-application/issues"
+  },
+  "homepage": "https://github.com/MithunTechnologies/node-js-application#readme"
 }
