@@ -35,7 +35,7 @@ kind: Service
 metadata: 
   name: nodejssvc
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: nodejs
   ports: 
